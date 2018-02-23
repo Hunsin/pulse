@@ -6,8 +6,6 @@ go:
 
 services: mongodb
 
-before_install: export GOPATH=$TRAVIS_BUILD_DIR
-
 before_script: go get github.com/globalsign/mgo
 
 script: go test -v -cover -bench .
