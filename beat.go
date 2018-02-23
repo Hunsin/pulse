@@ -27,7 +27,7 @@ func (p *ps) insertB() {
 	p.sB = []interface{}{}
 
 	go func() {
-		if err := p.db.C(cBeats).Insert(p.sB...); err != nil {
+		if err := p.db.C(cBeats).Insert(b...); err != nil {
 			p.eh(err, b...)
 		}
 

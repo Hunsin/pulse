@@ -20,11 +20,11 @@ type Config struct {
 }
 
 func openFile(d, c string) (*os.File, error) {
-	return os.OpenFile(fmt.Sprintf("%s/%s.log", d, c), os.O_APPEND|os.O_CREATE, 0666)
+	return os.OpenFile(fmt.Sprintf("%s/%s.log", d, c), os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 }
 
 func defaultHandler(dir string) (func(error, ...interface{}), error) {
-	if err := os.MkdirAll(dir, os.ModeDir|0666); err != nil {
+	if err := os.MkdirAll(dir, os.ModeDir|0775); err != nil {
 		return nil, err
 	}
 	b, err := openFile(dir, cBeats)
