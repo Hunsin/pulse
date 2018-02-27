@@ -42,6 +42,7 @@ func TestNew(t *testing.T) {
 		t.Fatal("New failed:", err)
 	}
 
+	// check TTL of collections
 	for _, c := range []string{cBeats, cHits} {
 		idx, _ := p.(*ps).db.C(c).Indexes()
 
@@ -56,6 +57,11 @@ func TestNew(t *testing.T) {
 		if i == len(idx) {
 			t.Errorf("New failed: Index of collection %s not set", c)
 		}
+	}
+
+	// check if error handler and level filter had been created
+	if p.(*ps).eh == nil || p.(*ps).lf == nil {
+		t.Error("New failed: default error handler or level filter func wasn't initialized")
 	}
 }
 

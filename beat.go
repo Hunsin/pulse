@@ -1,16 +1,23 @@
 package pulse
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/globalsign/mgo/bson"
 )
 
+// A Beat represents a logging object which specifies the issued time,
+// level and body of the message.
 type Beat struct {
 	id    bson.ObjectId `bson:"_id,omitempty"`
 	At    time.Time
 	Level string
 	Body  string
+}
+
+func (b Beat) String() string {
+	return fmt.Sprintln(b.At.Format(TimeFormat), b.Level, b.Body)
 }
 
 // inserB flushes the buffered beats into MongoDB.

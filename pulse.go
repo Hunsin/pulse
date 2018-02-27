@@ -10,9 +10,17 @@ import (
 )
 
 var (
+	// ErrExpired is returned if an operation requests Beats or Hits within
+	// the time already expired.
 	ErrExpired = errors.New("pulse: requested time already expired")
+
+	// ErrNoPulse is returned by Client() if the default Pulse is not created.
 	ErrNoPulse = errors.New("pulse: No Pulse was initialized")
-	client     Pulse
+
+	// TimeFormat defines the layout of timestamp.
+	TimeFormat = "2006-01-02 15:04:05.999999 -0700"
+
+	client Pulse
 )
 
 // A Pulse represents an event.

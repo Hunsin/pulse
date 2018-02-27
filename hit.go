@@ -1,22 +1,38 @@
 package pulse
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/globalsign/mgo/bson"
 )
 
+// A Hit represents an event of a client request, typically a
+// HTTP request is issued.
 type Hit struct {
 	id      bson.ObjectId `bson:"_id,omitempty"`
-	At      time.Time     `bson:""`
-	Method  string        `bson:""`
-	Path    string        `bson:""`
-	Status  int           `bson:""`
-	Dur     time.Duration `bson:""`
-	From    string        `bson:""`
-	Referer string        `bson:""`
-	Agent   string        `bson:""`
+	At      time.Time
+	Method  string
+	Path    string
+	Status  int
+	Dur     time.Duration
+	From    string
+	Referer string
+	Agent   string
+}
+
+func (h Hit) String() string {
+	return fmt.Sprintln(
+		h.At.Format(TimeFormat),
+		h.Method,
+		h.Path,
+		h.Status,
+		h.Dur,
+		h.From,
+		h.Referer,
+		h.Agent,
+	)
 }
 
 // A httpRecorder implements http.ResponseWriter interface.
