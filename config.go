@@ -67,8 +67,9 @@ func defaultHandler(dir string) (func(error, ...interface{}), error) {
 		}
 
 		if err != nil {
-			fmt.Fprintln(os.Stderr, n, err)
-			fmt.Fprint(b, Beat{"", n, "ERROR", err.Error()})
+			msg := Beat{"", n, "ERROR", err.Error()}
+			fmt.Fprint(os.Stderr, msg)
+			fmt.Fprint(b, msg)
 		}
 	}, nil
 }
